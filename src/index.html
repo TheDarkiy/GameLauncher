@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SERVERNAME</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle at top, #202733 0, #05070b 55%, #000 100%);
+            color: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+
+        iframe {
+            border: none;
+        }
+
+        .wrapper {
+            width: 900px;
+            height: 520px;
+            background: rgba(10, 10, 15, 0.95);
+            border-radius: 18px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+            display: grid;
+            grid-template-columns: 2fr 1.4fr;
+            overflow: hidden;
+            border: 1px solid rgba(153, 118, 118, 0.06);
+        }
+
+        .left {
+            padding: 30px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(135deg, rgba(3, 118, 195, 0.06), rgba(0, 0, 0, 0.03));
+        }
+
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: #0376C3;
+        }
+
+        .title {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            margin-top: 30%;
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+
+        .path-button {
+            border: none;
+            border-radius: 6px;
+            padding: 8px 8px;
+            background: #2c7be5;
+            color: #fff;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .settings {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #b0b0b0;
+            cursor: pointer;
+        }
+
+        .notify {
+            position: absolute;
+            margin: 30%;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .notify.error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .notify.success {
+            background: rgba(77, 255, 77, 0.1);
+            border: 1px solid rgba(77, 255, 77, 0.3);
+        }
+
+        .notify.warning {
+            background: rgba(255, 255, 77, 0.1);
+            border: 1px solid rgba(255, 255, 77, 0.3);
+        }
+
+        .notify h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .notify.error h2 {
+            color: #ff4d4d;
+        }
+        .notify.success h2 {
+            color: #4dff4d;
+        }
+        .notify.warning h2 {
+            color: #ffff4d;
+        }
+
+        .notify p {
+            font-size: 16px;
+        }
+
+        .notify.error p {
+            color: #ff9999;
+        }
+        .notify.success p {
+            color: #4dff4d;
+        }
+        .notify.warning p {
+            color: #ffff4d;
+        }
+
+        .loading-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .loading-content {
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .loading-spinner::after,
+        .loading-spinner::before {
+            content: '';  
+            box-sizing: border-box;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #FFF;
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: animloader 2s linear infinite;
+        }
+
+        .loading-spinner::after {
+            animation-delay: 1s;
+        }
+
+        @keyframes animloader {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle at top, #202733 0, #05070b 55%, #000 100%);
+            color: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wrapper {
+            width: 900px;
+            height: 520px;
+            background: rgba(10, 10, 15, 0.95);
+            border-radius: 18px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+            display: grid;
+            grid-template-columns: 2fr 1.4fr;
+            overflow: hidden;
+            border: 1px solid rgba(153, 118, 118, 0.06);
+        }
+
+        .left {
+            padding: 30px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(135deg, rgba(3, 118, 195, 0.06), rgba(0, 0, 0, 0.03));
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: #0376C3;
+        }
+
+        .title {
+            margin-top: 30px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+        
+        .status-bar {
+            margin-bottom: 10px;
+            display: flex;
+            gap: 15px;
+            font-size: 13px;
+        }
+
+        .status-pill {
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot-online {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #3ddc84;
+            box-shadow: 0 0 8px #3ddc84;
+        }
+
+        .dot-offline {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ff4b4b;
+            box-shadow: 0 0 8px #ff4b4b;
+        }
+
+        .bottom-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* .join-section {
+            
+            margin-top: 40px;
+
+        } */
+
+        .join-button {
+            padding: 16px 32px;
+            font-size: 18px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #0376C3, #0376C3);
+            color: #111;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 0 18px rgba(3, 118, 195, 0.6);
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+
+        .join-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 26px rgba(3, 118, 195, 0.9);
+        }
+
+        .join-info {
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #b0b0b0;
+        }
+
+        .footer {
+            font-size: 11px;
+            color: #777;
+        }
+
+        .discord-footer {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #888;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .discord-link {
+            color: #5865f2;
+            text-decoration: none;
+        }
+
+        .discord-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="settings" id="settings" style="display: none;"><i class="fas fa-cog"></i></div>
+
+    <div class="wrapper" id="mainContent" style="display: none;">
+        <div class="left">
+            <div>
+                <div class="logo"><span>DEIN</span>SERVERNAME</div>
+                <div class="title">Willkommen auf deinem Server</div>
+                <div class="subtitle">
+                    Beschreiung einfügen<br>
+                    z.B. Roleplay, Fivem, etc:
+                </div>
+            </div>
+
+            <div class="bottom-section">
+                <div class="join-section">
+                    <div class="join-info">
+                        Verbinde direkt mit:<br>
+                        <code>connect DEINESERVERIP</code>
+                    </div>
+                    <div class="status-bar">
+                        <div class="status-pill">
+                            <div class="dot-online"></div>
+                            <span>Server Online</span>
+                        </div>
+                        <div class="status-pill">
+                            <span>Spieler:</span>
+                            <span id="playerCount">24 / 128</span>
+                        </div>
+                    </div>
+                    <button class="join-button" id="joinbutton" data-launcher-action="join">Server beitreten</button>
+                </div>
+                <div class="footer">
+                    © 2026 SERVERNAME · Discord: <a class="discord-link" href="https://discord.gg/GG" target="_blank">SERVERNAME</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <div class = "loading-screen" style="display: flex;">
+         <div class="loading-content">
+            <div class="loding-logo">
+                <img id="logo" src="logo.webp" alt="Logo" width="200">
+            </div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <div class="notify" id="notify" style="display: none;">
+        <h2 id="notifyTitle">Fehler</h2>
+        <p id="notifyMessage">Es ist ein Fehler aufgetreten. Bitte versuche es erneut.</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
