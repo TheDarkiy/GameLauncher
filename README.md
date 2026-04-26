@@ -1,6 +1,6 @@
 # GameLauncher
 Silverlake City Launcher - Funktionsuebersicht
-
+Du benötigdt NodeJS
 Diese Datei beschreibt alle wichtigen Funktionen im Projekt mit kurzen Beispielen.
 
     Projektstruktur (relevant)
