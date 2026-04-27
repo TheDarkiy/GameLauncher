@@ -1,5 +1,5 @@
 # GameLauncher
-Silverlake City Launcher - Funktionsuebersicht
+GameLauncher - Funktionsuebersicht
 Du benötigdt NodeJS
 Diese Datei beschreibt alle wichtigen Funktionen im Projekt mit kurzen Beispielen.
 
